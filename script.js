@@ -21,13 +21,14 @@ $("#search-button").on("click", function () {
 });
 
 function createList() {
+    //Create the list items and append them
     var cityName = $("#search").val();
     var listItem = $("<li>").text(cityName);
     $(".list-group").append(listItem);
   }
 
 function extractWeatherData(response) {
-    //Get the data from the returned API object
+    //Get the data from current weather returned API object
     var data = {}
     data.name = response.name
     data.date = moment.unix(response.dt).format("M/D/Y")
@@ -39,18 +40,16 @@ function extractWeatherData(response) {
 }
 
 function extractFiveDayData(dataArray) {
+    //Create array for 5 day data
     var fiveDays = []
     for (i = 0; i < 5; i++) {
         fiveDays.push(extractSingleDay(dataArray[i]))
     }
-    // var data = {}
-    // data.temp = (response.list.main.temp - 273.15) * 1.80 + 32;
-    // data.humidity = response.list.main.humidity;
-    // console.log(fiveDays)
     return fiveDays
 }
 
 function extractSingleDay(apiData) {
+    //Get the data from 5 day returned API object for each of the 5 days
     var data = {}
     data.date = moment.unix(apiData.dt).format("M/D/Y")
     data.icon = createIconURL(apiData.weather[0].icon)
@@ -60,6 +59,7 @@ function extractSingleDay(apiData) {
 }
 
 function fetchWeatherData(cityName) {
+    //Query current weather API based on city name, append to correct place on page
     var queryURL = generateQueryURL(cityName)
     $.ajax({
         url: queryURL,
@@ -80,6 +80,7 @@ function fetchWeatherData(cityName) {
 }
 
 function fetchUvData({ coord }) {
+    //Query API for UV Data
     var queryURL = "https://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + coord.lat + "&lon=" + coord.lon;
     return $.ajax({
         url: queryURL,
@@ -88,6 +89,7 @@ function fetchUvData({ coord }) {
 }
 
 function fetchForecastData(coord) {
+    //Query API for 5 day data based on coordinates, append to correct place on page
     var queryURL = generateQuery2URL(coord)
     // console.log(queryURL)
     $.ajax({
@@ -104,6 +106,7 @@ function fetchForecastData(coord) {
 }
 
 function createCurrentWeatherDivs(data, uvIndex) {
+    //Create divs for current day data and UV data
     // console.log(data)
     var currentWeatherDiv = $("<div>")
     var topRow = $("<div class='top-row'>")
@@ -127,6 +130,7 @@ function createCurrentWeatherDivs(data, uvIndex) {
 }
 
 function createFiveDayDivs(arrayOfDays) {
+    //Create container for each 5 of the 5 day weather cards
     var forecastContainer = $("<div class='weatherclass'>")
     for (i = 0; i < arrayOfDays.length; i++) {
         var card = createForecastCard(arrayOfDays[i])
@@ -136,6 +140,7 @@ function createFiveDayDivs(arrayOfDays) {
 }
 
 function createForecastCard(data) {
+    //Create individual 5 day weather cards
     console.log(data)
     var singleDayDiv = $("<div class='single-card'>")
     var mString = $(`<h2>${data.date}</h2>`)
@@ -146,5 +151,6 @@ function createForecastCard(data) {
 }
 
 function createIconURL(icon) {
+    //Convert icons to pictures
     return "http://openweathermap.org/img/wn/" + icon + "@2x.png"
 }
