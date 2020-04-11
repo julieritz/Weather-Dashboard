@@ -1,0 +1,47 @@
+.navbar {
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+h5 {
+    padding-top: 10px;
+}
+
+.weatherapp {
+    height: 100vh;
+    width: 100vw;
+    margin: 0px;
+    padding-left: 15px;
+}
+
+.weatherclass {
+    display: flex;
+    padding-top: 40px;
+    padding-right: 25px
+}
+
+.top-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.single-card {
+    color: white;
+    padding-left: 3px;
+    background-color: blue;
+}
+
+.main-title {
+    font-size: 16px;
+}
