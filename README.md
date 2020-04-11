@@ -14,3 +14,5 @@ Using jQuery and Ajax, I used to functions to:
 4. Query each API for data
 5. Create spaces on the page for the data to display and
 7. Convert returned icons into pictures
+
+![image](https://user-images.githubusercontent.com/60047114/79056691-d0ef8a80-7c0d-11ea-9fca-01b172043894.png)
